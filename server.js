@@ -29,6 +29,11 @@ app.get("/health", (req, res) => {
   });
 });
 
-app.listen(port, () => {
+const server = app.listen(port, () => {
   console.log(`Server listening on port ${port}`);
+});
+
+server.on("error", (err) => {
+  console.error("Server error:", err.code, err.message);
+  process.exit(1);
 });

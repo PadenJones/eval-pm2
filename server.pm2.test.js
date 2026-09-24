@@ -1,10 +1,10 @@
 import ecosystem from "./ecosystem.config.cjs";
-import GenericJsonApi from "./helpers/GenericJsonApi";
+import GenericJsonApi from "./src/helpers/GenericJsonApi";
 
 const app = ecosystem.apps.find((app) => (app.name = "eval-pm2"));
 
 const LocalApi = GenericJsonApi({
-  base: "http://localhost:3000",
+  base: `http://localhost:${app.env.PORT}`,
 });
 
 describe("Load Balancer", () => {
