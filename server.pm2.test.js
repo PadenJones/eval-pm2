@@ -1,22 +1,14 @@
 import ecosystem from "./ecosystem.config.cjs";
-import GenericJsonApi from "./src/helpers/GenericJsonApi";
+import LocalApi from "#src/resources/LocalApi.js";
 
 const app = ecosystem.apps.find((app) => (app.name = "eval-pm2"));
-
-const LocalApi = GenericJsonApi({
-  base: `http://localhost:${app.env.PORT}`,
-});
 
 describe("Load Balancer", () => {
   it("should contain instances ... 0 through 3", async () => {
     const instances = await Promise.all(
       Array.from({ length: app.instances * 10 }, async () => {
-        const { data } = await LocalApi({
-          path: "/health",
-          transformData: (data) => data.instance,
-        });
-
-        return data;
+        const { data } = await LocalApi.health();
+        return data?.instance;
       }),
     );
 

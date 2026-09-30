@@ -28,5 +28,10 @@
   },
   "allowScripts": {
     "fsevents@2.3.3": true
+  },
+  "jest": {
+    "setupFiles": [
+      "<rootDir>/jest.setup.cjs"
+    ]
   }
 }
