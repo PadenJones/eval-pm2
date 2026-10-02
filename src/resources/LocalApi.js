@@ -1,10 +1,9 @@
-import GenericJsonApi from "#src/helpers/GenericJsonApi.js";
-
-const PORT = process.env.PORT || 3000;
+import { GenericJsonApi } from "@padenjones/utils";
 
 const LocalApi = GenericJsonApi({
   name: "LocalApi",
-  base: "http://localhost:" + PORT,
+  base: "http://localhost",
+  port: process.env.PORT || 3000,
   routes: {
     health: {
       route: "/health",
